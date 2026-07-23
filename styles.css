@@ -1,11 +1,5 @@
 /* ==========================================================
-   UZAIRR — HOME PAGE STYLES
-   Palette (per brief):
-     --bg      #FFFFFF  (use more)
-     --ink     #002B26  (use more)
-     --accent  #9FFFFC  (use less — rare highlight)
-     --accent2 #20AAAA  (use less — rare highlight)
-   Font: stand-in Inter, swap for Neue Haas Grotesk when licensed
+   UZAIRR — GLOBAL STYLES
 ========================================================== */
 
 :root {
@@ -61,7 +55,7 @@ a {
     }
 }
 
-/* ---------- reveal-on-scroll ---------- */
+/* ---------- REVEAL ON SCROLL ---------- */
 .reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -73,7 +67,9 @@ a {
     transform: translateY(0);
 }
 
-/* ============ HEADER / NAV ============ */
+/* ==========================================================
+   NAVIGATION
+========================================================== */
 .site-header {
     position: sticky;
     top: 0;
@@ -83,7 +79,6 @@ a {
 }
 
 .header-inner {
-    max-width: 1400px;
     margin: 0 auto;
     height: 100%;
     padding: 0 32px;
@@ -101,11 +96,9 @@ a {
 
 .logo img {
     height: 80px;
-    /* ← FIXED: consistent across all pages */
     width: auto;
 }
 
-/* centered uppercase nav, per brief */
 .main-nav {
     position: absolute;
     left: 50%;
@@ -168,7 +161,9 @@ a {
     transform: translateY(-7px) rotate(-45deg);
 }
 
-/* ============ HERO ============ */
+/* ==========================================================
+   HERO (Homepage)
+========================================================== */
 .hero {
     position: relative;
     max-width: 1400px;
@@ -245,13 +240,14 @@ a {
     transform: scale(1.03);
 }
 
-/* ============ INNER PAGE HERO ============ */
+/* ==========================================================
+   INNER PAGE HERO (Brands, Fonts, About, Contact)
+========================================================== */
 .page-hero {
     position: relative;
-    max-width: 1400px;
     margin: 0 auto;
     padding: 32px 32px 48px;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .page-title {
@@ -265,7 +261,36 @@ a {
     z-index: 2;
 }
 
-/* ============ ABOUT: INTRO ============ */
+/* Full-width image for inner pages */
+.page-hero .hero-image {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 0;
+    border-radius: 0px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    background: transparent;
+}
+
+.page-hero .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s var(--ease);
+}
+
+.page-hero .hero-image:hover img {
+    transform: scale(1.03);
+}
+
+/* ==========================================================
+   ABOUT PAGE
+========================================================== */
 .about-intro {
     max-width: 1400px;
     margin: 0 auto;
@@ -300,7 +325,6 @@ a {
     letter-spacing: -0.01em;
 }
 
-/* ============ ABOUT: GENERIC SECTION ============ */
 .about-section {
     max-width: 1400px;
     margin: 0 auto;
@@ -377,7 +401,9 @@ a {
     letter-spacing: -0.02em;
 }
 
-/* ============ CONTACT ============ */
+/* ==========================================================
+   CONTACT PAGE
+========================================================== */
 .contact-layout {
     max-width: 1400px;
     margin: 0 auto;
@@ -387,12 +413,15 @@ a {
     gap: 64px;
 }
 
+/* --- RESIZE CONTACT IMAGE HERE --- */
 .contact-image {
-    flex: 0 0 380px;
+    flex: 0 0 400px;
     aspect-ratio: 4/5;
     overflow: hidden;
     border-radius: 2px;
 }
+
+/* --------------------------------- */
 
 .contact-image img {
     width: 100%;
@@ -401,29 +430,53 @@ a {
     filter: grayscale(1);
 }
 
+.contact-image img {
+    transition: transform 0.6s var(--ease), filter 0.6s var(--ease);
+}
+
+.contact-image:hover img {
+    transform: scale(1.06);
+    filter: grayscale(0);
+}
+
 .contact-form-wrap {
     flex: 1;
     max-width: 560px;
 }
 
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+.contact-card {
+    background: transparent;
+    border: none;
+    border-radius: 15%;
+    padding: 0px;
+    box-shadow: none;
 }
 
+.contact-intro {
+    font-size: 18px;
+    color: var(--accent2);
+    opacity: 0.8;
+    margin-bottom: 32px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+/* Contact Form Inputs */
 .form-group {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 24px;
 }
 
 .form-group label {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--accent2);
+    color: rgba(255, 255, 255, 0.4);
+    display: block;
+    margin-bottom: 6px;
 }
 
 .form-group input,
@@ -431,46 +484,65 @@ a {
     font-family: var(--font-body);
     font-size: 16px;
     color: var(--ink);
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(0, 43, 38, 0.2);
-    padding: 10px 0;
+    background: transparent !important;
+    border: none !important;
+    padding: 4px 0 16px 0;
+    width: 100%;
     resize: vertical;
-    transition: border-color 0.3s var(--ease);
+    transition: all 0.3s var(--ease);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: 400;
+    font-size: 15px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-bottom-color: var(--ink);
+    color: var(--accent2);
+    background: transparent !important;
 }
 
+.form-group input:focus::placeholder,
+.form-group textarea:focus::placeholder {
+    color: rgba(32, 170, 170, 0.3);
+}
+
+/* Contact Submit Button */
 .btn-submit {
     align-self: flex-start;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--bg);
     background: var(--ink);
     border: none;
-    padding: 14px 32px;
+    padding: 14px 36px;
+    border-radius: 0px;
     cursor: pointer;
-    transition: background 0.3s var(--ease), transform 0.2s var(--ease);
+    transition: all 0.3s var(--ease);
+    margin-top: 8px;
 }
 
 .btn-submit:hover {
     background: var(--accent2);
+    color: var(--bg);
+    transform: translateY(-2px);
 }
 
 .btn-submit:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
 }
 
 .btn-submit:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+    transform: none;
 }
 
 .form-status {
@@ -487,7 +559,24 @@ a {
     color: #b3261e;
 }
 
-/* ============ SECTION LABEL ============ */
+/* Contact Autofill fix */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #002B26 inset !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #002B26 inset !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
+/* ==========================================================
+   GALLERIES (Home, Brands, Fonts)
+========================================================== */
 .section-label {
     font-size: 13px;
     font-weight: 600;
@@ -498,7 +587,6 @@ a {
     margin-bottom: 32px;
 }
 
-/* ============ GALLERY 3x3 ============ */
 .gallery {
     max-width: 1400px;
     margin: 0 auto;
@@ -578,7 +666,19 @@ a {
     --d: 8;
 }
 
-/* ============ TESTIMONIALS DUAL MARQUEE ============ */
+/* Fonts Page Specific Override */
+.fonts-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.fonts-grid .gallery-item {
+    aspect-ratio: 16/4;
+}
+
+/* ==========================================================
+   TESTIMONIALS (Dual Marquee)
+========================================================== */
 .testimonials {
     padding: 64px 0 96px;
     border-top: 1px solid rgba(0, 43, 38, 0.08);
@@ -605,17 +705,14 @@ a {
     gap: 20px;
 }
 
-/* Scroll left animation */
 .scroll-left {
     animation: scroll-left 40s linear infinite;
 }
 
-/* Scroll right animation */
 .scroll-right {
     animation: scroll-right 40s linear infinite;
 }
 
-/* Pause on hover for both tracks */
 .marquee-container:hover .scroll-left,
 .marquee-container:hover .scroll-right {
     animation-play-state: paused;
@@ -682,7 +779,9 @@ a {
     }
 }
 
-/* ============ FOOTER ============ */
+/* ==========================================================
+   FOOTER
+========================================================== */
 .site-footer {
     padding: 32px;
 }
@@ -739,7 +838,9 @@ a {
     text-decoration: none;
 }
 
-/* ============ RESPONSIVE ============ */
+/* ==========================================================
+   RESPONSIVE MEDIA QUERIES
+========================================================== */
 @media (max-width: 860px) {
     .testimonial-card {
         width: 260px;
@@ -846,6 +947,15 @@ a {
         width: 100%;
         max-width: 280px;
         aspect-ratio: 1/1;
+    }
+
+    .contact-card {
+        padding: 0px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        justify-content: center;
     }
 
     .hero-eyebrow {

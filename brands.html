@@ -55,7 +55,7 @@
             <p class="section-label reveal">Branding Projects</p>
 
             <div class="gallery-grid grid-6x6" id="brandsGrid">
-                <!-- 36 items, generated below to keep markup short -->
+                <!-- 36 items generated via JS below -->
             </div>
         </section>
 
@@ -102,7 +102,7 @@
 
     <script src="script.js"></script>
     <script>
-        // Build the 6x6 grid (36 placeholder items) without repeating markup 36 times by hand.
+        // Build the 6x6 grid (36 placeholder items)
         const grid = document.getElementById('brandsGrid');
         if (grid) {
             for (let i = 1; i <= 36; i++) {
@@ -111,7 +111,7 @@
                 item.innerHTML = `<img src="assets/place_holder_for_images_temprory.jpeg" alt="Branding project ${String(i).padStart(2, '0')}">`;
                 grid.appendChild(item);
             }
-            // re-observe the newly created reveal elements
+            // Re-observe the newly created reveal elements
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
