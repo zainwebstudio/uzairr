@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brands — Uzairr</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ============ NAV ============ -->
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">
+                <img src="assets\main_logo.svg" alt="Uzairr">
+            </a>
+
+            <nav class="main-nav" id="mainNav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="brands.html" class="nav-link is-active">Brands</a>
+                <a href="fonts.html" class="nav-link">Fonts</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+
+            <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- ============ PAGE HERO ============ -->
+        <section class="page-hero">
+            <p class="hero-eyebrow reveal">Selected Clients</p>
+            <h1 class="page-title reveal">Brands</h1>
+
+            <img class="hero-mark" src="assets/main_logo.jpeg" alt="" aria-hidden="true">
+
+            <div class="hero-image reveal">
+                <img src="assets/place_holder_for_images_temprory.jpeg" alt="Featured branding project">
+            </div>
+        </section>
+
+        <!-- ============ GALLERY (6x6) ============ -->
+        <section class="gallery">
+            <p class="section-label reveal">Branding Projects</p>
+
+            <div class="gallery-grid grid-6x6" id="brandsGrid">
+                <!-- 36 items, generated below to keep markup short -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-social">
+                <a href="https://www.fiverr.com/muhammaduzai914" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                        stroke-width="1.6">
+                        <path d="M4 8h11a4 4 0 0 1 4 4v8M4 12h11M4 16h8" />
+                    </svg>
+                    <span>Fiverr</span>
+                </a>
+                <a href="https://www.instagram.com/designbyuzairr" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                        stroke-width="1.6">
+                        <rect x="3" y="3" width="18" height="18" rx="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+                    </svg>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.linkedin.com/in/uzairr/" target="_blank" rel="noopener noreferrer"
+                    class="social-link">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                        stroke-width="1.6">
+                        <rect x="3" y="3" width="18" height="18" rx="3" />
+                        <line x1="7.5" y1="10" x2="7.5" y2="16.5" />
+                        <circle cx="7.5" cy="7" r="0.9" fill="currentColor" stroke="none" />
+                        <path d="M11.5 16.5V10M11.5 12.5c0-1.4 1.1-2.5 2.5-2.5s2.3 1.1 2.3 2.5v4" />
+                    </svg>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+
+            <p>&#169; 2026 Uzairr</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Build the 6x6 grid (36 placeholder items) without repeating markup 36 times by hand.
+        const grid = document.getElementById('brandsGrid');
+        if (grid) {
+            for (let i = 1; i <= 36; i++) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item reveal';
+                item.innerHTML = `<img src="assets/place_holder_for_images_temprory.jpeg" alt="Branding project ${String(i).padStart(2, '0')}">`;
+                grid.appendChild(item);
+            }
+            // re-observe the newly created reveal elements
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+                grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            } else {
+                grid.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+            }
+        }
+    </script>
+</body>
+
+</html>
