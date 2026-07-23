@@ -9,8 +9,8 @@
 ========================================================== */
 
 :root {
-    --bg: #FFFFFF;
-    --ink: #002B26;
+    --bg: #002B26;
+    --ink: #FFFFFF;
     --accent: #9FFFFC;
     --accent2: #20AAAA;
 
@@ -77,11 +77,9 @@ a {
 .site-header {
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 60;
     height: var(--nav-h);
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(0, 43, 38, 0.08);
+    background: rgba(0, 0, 0, 0);
 }
 
 .header-inner {
@@ -102,7 +100,7 @@ a {
 }
 
 .logo img {
-    height: 40px;
+    height: 80px;
     width: auto;
 }
 
@@ -116,6 +114,7 @@ a {
     gap: 40px;
 }
 
+
 .nav-link {
     font-size: 13px;
     font-weight: 600;
@@ -124,22 +123,16 @@ a {
     color: var(--ink);
     position: relative;
     padding: 6px 0;
+    /* Remove the underline effect */
+    text-decoration: none;
 }
 
-.nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 100%;
-    bottom: 0;
-    height: 1px;
-    background: var(--accent2);
-    transition: right 0.35s var(--ease);
-}
-
-.nav-link:hover::after,
-.nav-link.is-active::after {
-    right: 0;
+.nav-link:hover,
+.nav-link.is-active {
+    color: var(--accent2);
+    /* #20AAAA */
+    font-weight: 800;
+    /* Bold */
 }
 
 .nav-toggle {
@@ -182,8 +175,10 @@ a {
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 96px 32px 64px;
-    overflow: hidden;
+    padding: 32px 50px 64px;
+    /* NOTE: overflow: hidden removed here on purpose.
+       .hero-mark is absolutely positioned with negative top/right
+       offsets, so clipping overflow on this container was hiding it. */
 }
 
 .hero-eyebrow {
@@ -226,17 +221,18 @@ a {
 /* ghosted brand mark behind the headline — the one signature move */
 .hero-mark {
     position: absolute;
-    top: -8%;
+    top: -5%;
     right: -6%;
     width: min(70vw, 640px);
-    opacity: 0.05;
+    opacity: 0.4;
+    /* was 0.05 — effectively invisible; adjust to taste */
     filter: grayscale(1);
     pointer-events: none;
     z-index: 1;
 }
 
 .hero-image {
-    margin-top: 56px;
+    margin-top: 60px;
     width: 100%;
     aspect-ratio: 16/9;
     overflow: hidden;
@@ -536,6 +532,7 @@ a {
     overflow: hidden;
     background: var(--ink);
     position: relative;
+    border-radius: 10px;
 }
 
 .gallery-item img {
@@ -593,27 +590,46 @@ a {
     --d: 8;
 }
 
-/* ============ TESTIMONIALS MARQUEE ============ */
+/* ============ TESTIMONIALS DUAL MARQUEE ============ */
 .testimonials {
     padding: 64px 0 96px;
     border-top: 1px solid rgba(0, 43, 38, 0.08);
     border-bottom: 1px solid rgba(0, 43, 38, 0.08);
 }
 
-.marquee {
+.marquee-container {
     overflow: hidden;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+
+.marquee-row {
+    overflow: hidden;
+    width: 100%;
 }
 
 .marquee-track {
     display: flex;
     width: max-content;
     gap: 20px;
-    animation: scroll-left 42s linear infinite;
 }
 
-.marquee:hover .marquee-track {
+/* Left to right animation */
+.left-to-right {
+    animation: scroll-left 40s linear infinite;
+}
+
+/* Right to left animation */
+.right-to-left {
+    animation: scroll-right 40s linear infinite;
+}
+
+/* Pause on hover for both tracks */
+.marquee-container:hover .left-to-right,
+.marquee-container:hover .right-to-left {
     animation-play-state: paused;
 }
 
@@ -627,6 +643,13 @@ a {
     flex-direction: column;
     gap: 16px;
     white-space: normal;
+    background: rgba(255, 255, 255, 0.03);
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+
+.testimonial-card:hover {
+    border-color: var(--accent2);
+    background: rgba(32, 170, 170, 0.05);
 }
 
 .testimonial-stars {
@@ -658,6 +681,16 @@ a {
 
     to {
         transform: translateX(-50%);
+    }
+}
+
+@keyframes scroll-right {
+    from {
+        transform: translateX(-50%);
+    }
+
+    to {
+        transform: translateX(0);
     }
 }
 
@@ -714,6 +747,8 @@ a {
 .social-link:hover {
     color: var(--accent2);
     opacity: 1;
+    font-weight: 800;
+    text-decoration: none;
 }
 
 /* ============ RESPONSIVE ============ */
@@ -721,6 +756,14 @@ a {
     .testimonial-card {
         width: 260px;
         padding: 22px;
+    }
+
+    .marquee-container {
+        gap: 14px;
+    }
+
+    .marquee-track {
+        gap: 14px;
     }
 
     .main-nav {
