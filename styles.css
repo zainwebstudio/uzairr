@@ -114,7 +114,6 @@ a {
     gap: 40px;
 }
 
-
 .nav-link {
     font-size: 13px;
     font-weight: 600;
@@ -123,16 +122,13 @@ a {
     color: var(--ink);
     position: relative;
     padding: 6px 0;
-    /* Remove the underline effect */
     text-decoration: none;
 }
 
 .nav-link:hover,
 .nav-link.is-active {
     color: var(--accent2);
-    /* #20AAAA */
     font-weight: 800;
-    /* Bold */
 }
 
 .nav-toggle {
@@ -176,9 +172,6 @@ a {
     max-width: 1400px;
     margin: 0 auto;
     padding: 32px 50px 64px;
-    /* NOTE: overflow: hidden removed here on purpose.
-       .hero-mark is absolutely positioned with negative top/right
-       offsets, so clipping overflow on this container was hiding it. */
 }
 
 .hero-eyebrow {
@@ -218,14 +211,12 @@ a {
     --i: 2;
 }
 
-/* ghosted brand mark behind the headline — the one signature move */
 .hero-mark {
     position: absolute;
     top: -5%;
     right: -6%;
     width: min(70vw, 640px);
     opacity: 0.4;
-    /* was 0.05 — effectively invisible; adjust to taste */
     filter: grayscale(1);
     pointer-events: none;
     z-index: 1;
@@ -252,7 +243,7 @@ a {
     transform: scale(1.03);
 }
 
-/* ============ INNER PAGE HERO (Brands / Fonts / About / Contact) ============ */
+/* ============ INNER PAGE HERO ============ */
 .page-hero {
     position: relative;
     max-width: 1400px;
@@ -272,7 +263,7 @@ a {
     z-index: 2;
 }
 
-/* ============ ABOUT: INTRO (image beside text) ============ */
+/* ============ ABOUT: INTRO ============ */
 .about-intro {
     max-width: 1400px;
     margin: 0 auto;
@@ -307,7 +298,7 @@ a {
     letter-spacing: -0.01em;
 }
 
-/* ============ ABOUT: GENERIC SECTION WRAPPER ============ */
+/* ============ ABOUT: GENERIC SECTION ============ */
 .about-section {
     max-width: 1400px;
     margin: 0 auto;
@@ -315,7 +306,6 @@ a {
     border-top: 1px solid rgba(0, 43, 38, 0.08);
 }
 
-/* ---------- Experience ---------- */
 .experience-list {
     list-style: none;
     max-width: 900px;
@@ -345,7 +335,6 @@ a {
     white-space: nowrap;
 }
 
-/* ---------- Skills ---------- */
 .skills-list {
     list-style: none;
     display: flex;
@@ -372,7 +361,6 @@ a {
     color: var(--bg);
 }
 
-/* ---------- Mission ---------- */
 .about-mission {
     text-align: center;
     padding-bottom: 96px;
@@ -455,7 +443,6 @@ a {
     border-bottom-color: var(--ink);
 }
 
-/* the black box + monospace "SUBMIT" from the brief's example */
 .btn-submit {
     align-self: flex-start;
     font-family: 'Courier New', Courier, monospace;
@@ -549,7 +536,6 @@ a {
     filter: grayscale(0);
 }
 
-/* stagger the reveal across the grid */
 .gallery-item.reveal {
     transition-delay: calc(var(--d, 0) * 0.06s);
 }
@@ -617,19 +603,19 @@ a {
     gap: 20px;
 }
 
-/* Left to right animation */
-.left-to-right {
+/* Scroll left animation */
+.scroll-left {
     animation: scroll-left 40s linear infinite;
 }
 
-/* Right to left animation */
-.right-to-left {
+/* Scroll right animation */
+.scroll-right {
     animation: scroll-right 40s linear infinite;
 }
 
 /* Pause on hover for both tracks */
-.marquee-container:hover .left-to-right,
-.marquee-container:hover .right-to-left {
+.marquee-container:hover .scroll-left,
+.marquee-container:hover .scroll-right {
     animation-play-state: paused;
 }
 
@@ -869,7 +855,6 @@ a {
         line-height: 1.02;
     }
 
-    /* ghost mark: smaller, tucked behind, and out of the headline's way */
     .hero-mark {
         width: 52vw;
         top: auto;
