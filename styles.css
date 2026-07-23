@@ -101,6 +101,7 @@ a {
 
 .logo img {
     height: 80px;
+    /* ← FIXED: consistent across all pages */
     width: auto;
 }
 
@@ -123,6 +124,7 @@ a {
     position: relative;
     padding: 6px 0;
     text-decoration: none;
+    transition: color 0.3s var(--ease), font-weight 0.3s var(--ease);
 }
 
 .nav-link:hover,
@@ -248,7 +250,7 @@ a {
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 64px 32px 48px;
+    padding: 32px 32px 48px;
     overflow: hidden;
 }
 
@@ -267,7 +269,7 @@ a {
 .about-intro {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 16px 32px 96px;
+    padding: 32px 32px 96px;
     display: flex;
     align-items: center;
     gap: 64px;
@@ -302,7 +304,7 @@ a {
 .about-section {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 64px 32px;
+    padding: 32px 32px;
     border-top: 1px solid rgba(0, 43, 38, 0.08);
 }
 
@@ -379,7 +381,7 @@ a {
 .contact-layout {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 16px 32px 96px;
+    padding: 32px 32px 96px;
     display: flex;
     align-items: flex-start;
     gap: 64px;
