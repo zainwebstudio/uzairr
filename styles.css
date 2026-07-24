@@ -75,14 +75,17 @@ a {
 }
 
 /* ==========================================================
-   NAVIGATION
+   NAVIGATION - FIXED (NO BLUR, JUST TRANSPARENT)
 ========================================================== */
 .site-header {
-    position: sticky;
-    top: 12px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     z-index: 60;
     height: var(--nav-h);
     background: rgba(0, 0, 0, 0);
+    /* FULLY TRANSPARENT - NO BLUR */
     width: 100%;
 }
 
@@ -102,6 +105,7 @@ a {
     display: flex;
     align-items: center;
     z-index: 2;
+    flex-shrink: 0;
 }
 
 .logo img {
@@ -109,12 +113,14 @@ a {
     width: auto;
 }
 
+/* DESKTOP NAV - CENTERED */
 .main-nav {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     display: flex;
+    align-items: center;
     gap: clamp(20px, 3vw, 40px);
 }
 
@@ -149,6 +155,7 @@ a {
     border: none;
     cursor: pointer;
     z-index: 2;
+    flex-shrink: 0;
 }
 
 .nav-toggle span {
@@ -169,6 +176,54 @@ a {
 
 .nav-toggle.is-open span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Header spacer - prevents content from hiding under fixed header */
+.header-spacer {
+    height: var(--nav-h);
+    width: 100%;
+}
+
+/* ==========================================================
+   MOBILE NAV - slides in from right
+========================================================== */
+@media (max-width: 860px) {
+    .main-nav {
+        position: fixed;
+        inset: 0;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        background: var(--bg);
+        height: calc(100vh - var(--nav-h));
+        transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+        transform: translateX(100%);
+        opacity: 0;
+        padding: 20px;
+        width: 100%;
+        display: flex;
+    }
+
+    .main-nav.is-open {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .nav-link {
+        font-size: 18px;
+    }
+
+    .nav-toggle {
+        display: flex;
+    }
+
+    .logo img {
+        height: 32px;
+    }
 }
 
 /* ==========================================================
