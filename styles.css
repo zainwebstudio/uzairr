@@ -229,9 +229,9 @@ a {
 
 .hero-mark {
     position: absolute;
-    top: -5%;
-    right: -6%;
-    width: min(70vw, 640px);
+    top: -35%;
+    right: -4%;
+    width: min(390vw, 970px);
     opacity: 0.4;
     filter: grayscale(1);
     pointer-events: none;
@@ -692,13 +692,143 @@ textarea:-webkit-autofill {
     --d: 8;
 }
 
+/* ==========================================================
+   FONTS PAGE - HORIZONTAL BANNER STYLE
+   One long rectangle per font, like a specimen banner
+========================================================== */
 .fonts-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
 }
 
 .fonts-grid .gallery-item {
-    aspect-ratio: 16/9;
+    width: 100%;
+    aspect-ratio: 21/5;
+    /* Ultra-wide cinema ratio */
+    overflow: hidden;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+
+.fonts-grid .gallery-item:hover {
+    border-color: var(--accent2);
+    transform: scale(1.01);
+}
+
+.fonts-grid .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Or use 'contain' if you want to see the full font preview without cropping */
+    filter: grayscale(1);
+    transition: filter 0.6s var(--ease), transform 0.8s var(--ease);
+}
+
+.fonts-grid .gallery-item:hover img {
+    filter: grayscale(0);
+    transform: scale(1.02);
+}
+
+/* Optional: Add a font label overlay */
+.fonts-grid .gallery-item .font-label {
+    position: absolute;
+    bottom: 24px;
+    left: 32px;
+    z-index: 2;
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+}
+
+.fonts-grid .gallery-item:hover .font-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optional: Small font details */
+.fonts-grid .gallery-item .font-details {
+    position: absolute;
+    bottom: 24px;
+    right: 32px;
+    z-index: 2;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+    text-align: right;
+}
+
+.fonts-grid .gallery-item:hover .font-details {
+    opacity: 0.6;
+    transform: translateY(0);
+}
+
+/* Mobile adjustments */
+@media (max-width: 860px) {
+    .fonts-grid {
+        gap: 24px;
+    }
+
+    .fonts-grid .gallery-item {
+        aspect-ratio: 16/7;
+        /* Slightly taller on mobile but still wide */
+        border-radius: 6px;
+    }
+
+    .fonts-grid .gallery-item .font-label {
+        bottom: 16px;
+        left: 20px;
+        font-size: 16px;
+    }
+
+    .fonts-grid .gallery-item .font-details {
+        bottom: 16px;
+        right: 20px;
+        font-size: 9px;
+    }
+}
+
+@media (max-width: 480px) {
+    .fonts-grid .gallery-item {
+        aspect-ratio: 16/6;
+    }
+}
+
+/* ==========================================================
+   BIG SCREENS UPDATE FOR FONTS
+========================================================== */
+@media (min-width: 1800px) {
+    .fonts-grid {
+        gap: 60px;
+    }
+
+    .fonts-grid .gallery-item {
+        aspect-ratio: 24/8;
+        /* Even wider on big screens */
+        border-radius: 12px;
+    }
+
+    .fonts-grid .gallery-item .font-label {
+        bottom: 40px;
+        left: 48px;
+        font-size: clamp(36px, 4vw, 72px);
+    }
 }
 
 /* ==========================================================
@@ -1019,20 +1149,118 @@ textarea:-webkit-autofill {
 }
 
 /* ==========================================================
-   UNIFORM SCALE FOR BIG SCREENS
-   (24"/27" iMac, 32" monitors, 4K/5K, TVs)
-
-   No reflow, no extra grid columns, no different layout — the site is
-   designed at --design-w (1800px). Once the viewport is wider than that,
-   we scale the ENTIRE page up uniformly with `zoom`, so a 27" iMac shows
-   exactly the same layout as a normal desktop, just bigger — the way
-   pressing Cmd/Ctrl "+" in the browser works.
-
-   Capped at 1.8x so it doesn't get absurd on an 8K TV; raise/lower that
-   number to taste.
+/* ==========================================================
+   BIG SCREENS - PERFECT EXPANSION
+   No zoom, no transform scale - just natural expansion
 ========================================================== */
 @media (min-width: 1800px) {
-    html {
-        zoom: clamp(1, calc(100vw / 1800px), 1.8);
+
+    /* Let everything breathe naturally */
+    :root {
+        --max-w: 100%;
+        /* Full width on big screens */
+        --pad-x: clamp(72px, 8vw, 120px);
+        /* More padding */
+    }
+
+    /* Slightly larger typography */
+    .hero-title {
+        font-size: clamp(8rem, 10vw, 12rem);
+    }
+
+    .page-title {
+        font-size: clamp(5.5rem, 7vw, 8rem);
+    }
+
+    .about-text p {
+        font-size: clamp(1.8rem, 3vw, 2.4rem);
+    }
+
+    .mission-statement {
+        font-size: clamp(2.6rem, 5vw, 4rem);
+    }
+
+    /* Bigger nav links */
+    .nav-link {
+        font-size: clamp(15px, 1vw, 20px);
+    }
+
+    /* Bigger testimonials */
+    .testimonial-card {
+        width: clamp(420px, 28vw, 550px);
+        padding: clamp(36px, 3vw, 48px);
+    }
+
+    .testimonial-quote {
+        font-size: clamp(18px, 1.4vw, 24px);
+    }
+
+    /* Bigger gallery items on very large screens */
+    .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+        /* 4 columns on huge screens */
+    }
+
+    /* But keep the 6x6 grid as 6 columns */
+    .grid-6x6 .gallery-item {
+        flex: 0 1 calc((100% - 5 * 24px) / 6);
+    }
+
+    /* Bigger images in about/contact */
+    .about-image,
+    .contact-image {
+        flex: 0 0 30%;
+        /* Slightly smaller proportion */
+    }
+
+    /* Bigger logo */
+    .logo img {
+        height: clamp(84px, 6vw, 120px);
+    }
+
+    /* More spacing */
+    .hero {
+        padding: clamp(80px, 10vw, 140px) var(--pad-x);
+    }
+
+    .gallery {
+        padding: clamp(120px, 12vw, 180px) var(--pad-x);
+    }
+
+    .about-intro,
+    .contact-layout {
+        gap: clamp(64px, 8vw, 100px);
+    }
+}
+
+/* Even bigger screens (4K+) */
+@media (min-width: 2560px) {
+    :root {
+        --pad-x: clamp(120px, 12vw, 200px);
+    }
+
+    .hero-title {
+        font-size: clamp(12rem, 14vw, 18rem);
+    }
+
+    .page-title {
+        font-size: clamp(8rem, 10vw, 14rem);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(5, 1fr);
+        /* 5 columns on 4K */
+    }
+
+    .grid-6x6 .gallery-item {
+        flex: 0 1 calc((100% - 5 * 32px) / 6);
+    }
+
+    .nav-link {
+        font-size: clamp(20px, 1.2vw, 28px);
+    }
+
+    .logo img {
+        height: clamp(100px, 7vw, 150px);
     }
 }
