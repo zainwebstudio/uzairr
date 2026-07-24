@@ -1033,6 +1033,6 @@ textarea:-webkit-autofill {
 ========================================================== */
 @media (min-width: 1800px) {
     html {
-        zoom: clamp(1, calc(100vw / 1800), 1.8);
+        zoom: clamp(1, calc(100vw / 1800px), 1.8);
     }
 }

@@ -59,6 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+
     /* ---------- Contact form (works once a Formspree endpoint is set) ---------- */
     const contactForm = document.getElementById('contactForm');
     const formStatus = document.getElementById('formStatus');
